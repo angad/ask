@@ -7,28 +7,26 @@ params=(
     "action=query"
     "format=json"
     "generator=prefixsearch"
-    "prop=pageprops|description"
+    "prop=pageprops|description|info"
     "redirects="
     "ppprop=displaytitle"
+    "inprop=url"
     "gpsnamespace=0"
     "gpslimit=6"
 )
 
 urlencode="--data-urlencode "
-curl="curl --get "
 curl_params=""
 for param in "${params[@]}"; do
     curl_params+="${urlencode} $param "
 done
 
-pageid=`curl -s $curl_params $urlencode "gpssearch=$query" $search_url \
-    | jq '.query.pages | map(select(.index == 1)) | .[0].pageid' 2>/dev/null`
+result=`curl -s $curl_params $urlencode "gpssearch=$query" $search_url \
+    | jq '.query.pages | map(select(.index == 1)) | .[0].fullurl' 2>/dev/null`
 
-page_url="https://en.wikipedia.org/?curid="
-
-if [ -z "$pageid" ]
+if [ -z "$result" ]
 then
     echo "No results found!"
 else
-    echo $page_url$pageid
+    echo $result
 fi
