@@ -3,6 +3,8 @@
 
 Search popular websites from your command line quickly.
 
+![](https://github.com/angad/ask/blob/gh-pages/output.gif?raw=true)
+
 ## Supported sites
 
 - DuckDuckGo (`d`)
@@ -19,6 +21,7 @@ Search popular websites from your command line quickly.
 ## Usage
 
 Generate the Python Executable (.pex) file
+
     $ ./build.sh
 
 Run `ask.pex` file with search site and search query
