@@ -89,7 +89,25 @@ def github(query: str):
         print(exception)
         print("No results available!")
 
-
+@main.command()
+@main.command("d")
+def duckduckgo(query: str):
+    ''' Search DuckDuckGo '''
+    query = f"{query}"
+    search_url = "https://api.duckduckgo.com"
+    params = {
+            "q": query,
+            "format": "json"
+            }
+    response = requests.get(search_url, params, headers=headers)
+    try:
+        json_response = response.json()
+        #url = json_response['AbstractURL']
+        url = json_response['RelatedTopics'][0]['FirstURL']
+        webbrowser.open(url)
+    except Exception as exception:
+        print(exception)
+        print("No results available!")
 
 if __name__ == '__main__':
     main()

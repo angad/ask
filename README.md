@@ -5,14 +5,16 @@ Search popular websites from your command line quickly.
 
 ## Supported sites
 
-- Youtube (`y`)
-- Wikipedia (`w`)
-- Reddit (`r`)
+- DuckDuckGo (`d`)
 - Github (`g`)
+- Reddit (`r`)
+- Twitter (`t`)
+- Wikipedia (`w`)
+- Youtube (`y`)
 
 ## TODO sites
 
-- DuckDuckGo
+- Twitter
 
 ## Usage
 
@@ -31,7 +33,8 @@ Alternatively, you can just install the requirements and run the python file
 
 ## Dependencies
 
-    typer # for commandline utilities
+    typer # commandline utilities
+    requests # HTTP requests library
     youtube-search-python # makes searching youtube easier
     pex # packaging to pex file
 
