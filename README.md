@@ -7,10 +7,11 @@ Search popular websites from your command line quickly.
 
 - Youtube (`y`)
 - Wikipedia (`w`)
+- Reddit (`r`)
+- Github (`g`)
 
 ## TODO sites
 
-- Reddit
 - DuckDuckGo
 
 ## Usage
@@ -36,3 +37,4 @@ Alternatively, you can just install the requirements and run the python file
 
 ## TODO features
 - Result picker
+- Advanced Search - Search params

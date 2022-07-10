@@ -1,3 +1,3 @@
-typer[all]
+typer
 requests
 youtube-search-python
