@@ -109,5 +109,24 @@ def duckduckgo(query: str):
         print(exception)
         print("No results available!")
 
+@main.command()
+@main.command("h")
+def hackernews(query: str):
+    ''' Search DuckDuckGo '''
+    query = f"{query}"
+    search_url = "https://hn.algolia.com/api/v1/search"
+    params = {
+            "query": query,
+            "hitsPerPage": 1
+            }
+    response = requests.get(search_url, params )
+    try:
+        json_response = response.json()
+        url = json_response['hits'][0]['url']
+        webbrowser.open(url)
+    except Exception as exception:
+        print(exception)
+        print("No results available!")
+
 if __name__ == '__main__':
     main()
