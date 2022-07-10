@@ -1,37 +1,43 @@
-## Welcome to GitHub Pages
+# Ask
+### I am feeling lucky for popular sites on command line
 
-You can use the [editor on GitHub](https://github.com/angad/ask/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Search popular websites from your command line quickly.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Supported sites
 
-### Markdown
+- DuckDuckGo (`d`)
+- Github (`g`)
+- Reddit (`r`)
+- Twitter (`t`)
+- Wikipedia (`w`)
+- Youtube (`y`)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## TODO sites
 
-```markdown
-Syntax highlighted code block
+- Twitter
 
-# Header 1
-## Header 2
-### Header 3
+## Usage
 
-- Bulleted
-- List
+Generate the Python Executable (.pex) file
+    $ ./build.sh
 
-1. Numbered
-2. List
+Run `ask.pex` file with search site and search query
 
-**Bold** and _Italic_ and `Code` text
+    $ ./ask.pex w 'elon musk'
+    https://en.wikipedia.org/?curid=909036
 
-[Link](url) and ![Image](src)
-```
+Alternatively, you can just install the requirements and run the python file
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+    $ pip3 install -r requirements.txt
+    $ python3 ask.py w 'elon musk'
 
-### Jekyll Themes
+## Dependencies
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/angad/ask/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+    typer # commandline utilities
+    requests # HTTP requests library
+    youtube-search-python # makes searching youtube easier
+    pex # packaging to pex file
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## TODO features
+- Result picker
+- Advanced Search - Search params
