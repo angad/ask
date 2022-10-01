@@ -77,6 +77,25 @@ a {
        }
    }
 
+   function enterSearch(e) {
+        e.preventDefault();
+        console.log("Submit button clicked");
+        var pattern = $("#query").val();
+        var url = build_wiki_search_url(pattern);
+        $.ajax( {
+            type: "GET",
+            url: url,
+            dataType: 'jsonp',
+            success: function(data) {
+                console.log(Object.values(data.query.pages));
+                setWikiSearchResults(Object.values(data.query.pages));
+            },
+            error: function(errorMessage) {
+                console.log("damnn");
+            }
+        });
+    }
+
     $(document).ready(function() {
         var queryDefaultText = "Mindful Search Query";
         $("#query").click(function(e) {
@@ -91,24 +110,7 @@ a {
                 $("#query").val(queryDefaultText);
             }
         });
-        $(".btn").click(function(e) {
-            e.preventDefault();
-            console.log("Submit button clicked");
-            var pattern = $("#query").val();
-            var url = build_wiki_search_url(pattern);
-            $.ajax( {
-                type: "GET",
-                url: url,
-                dataType: 'jsonp',
-                success: function(data) {
-                    console.log(Object.values(data.query.pages));
-                    setWikiSearchResults(Object.values(data.query.pages));
-                },
-                error: function(errorMessage) {
-                    console.log("damnn");
-                }
-            });
-        });
+        $(".btn").click(enterSearch(e));
     })
 
 </script>
