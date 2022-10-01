@@ -72,7 +72,7 @@ a {
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
-           `;
+           ;
            $("#home").append(rowHTML);
        }
    }
@@ -110,7 +110,7 @@ a {
                 $("#query").val(queryDefaultText);
             }
         });
-        $(".btn").click(enterSearch(e));
+        $(".btn").click(enterSearch);
     })
 
 </script>
