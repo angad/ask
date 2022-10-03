@@ -123,8 +123,6 @@ a {
 
     function setSearchResults(site, rows) {
        $("#home").html("");
-       console.log("setSearch");
-       console.log(rows);
        for (const row in rows) {
            var rowHTML = `
                                 <div class="row">
@@ -138,6 +136,7 @@ a {
                                     </div>
                                 </div>
            `;
+           console.log(rowHTML);
            $("#home").append(rowHTML);
        }
    }
