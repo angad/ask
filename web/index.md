@@ -119,7 +119,7 @@ a {
         return result;
     }
 
-    function setSearchResults(rows) {
+    function setSearchResults(site, rows) {
        $("#home").html("");
        for (const row in rows) {
            var rowHTML = `
@@ -150,7 +150,7 @@ a {
             url: url,
             dataType: 'jsonp',
             success: function(data) {
-                setSearchResults(transformSearchResults("wikipedia", data));
+                setSearchResults("wikipedia", transformSearchResults("wikipedia", data));
             },
             error: function(errorMessage) {
                 console.log("damnn");
