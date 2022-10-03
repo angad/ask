@@ -91,8 +91,6 @@ a {
         switch(site) {
             case "wikipedia":
                 var pages = Object.values(data.query.pages);
-                console.log("transform");
-                console.log(pages);
                 for (const page in pages) {
                     var row = {};
                     row['url'] = pages[page].canonicalurl;
@@ -124,20 +122,18 @@ a {
     function setSearchResults(site, rows) {
        $("#home").html("");
        for (const row in rows) {
-            console.log(row);
             var rowHTML = `
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="search-item">
-                                            <h4 class="mb-1"><a href="${row['url']}">${site} - ${row.title}</a></h4>
-                                            <div class="font-13 text-success mb-3">${row.url}</div>
-                                            <p class="mb-0 text-muted">${row.description}</p>
+                                            <h4 class="mb-1"><a href="${rows[row].url}">${site} - ${rows[row].title}</a></h4>
+                                            <div class="font-13 text-success mb-3">${rows[row].url}</div>
+                                            <p class="mb-0 text-muted">${rows[row].description}</p>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
            `;
-           console.log(rowHTML);
            $("#home").append(rowHTML);
        }
    }
