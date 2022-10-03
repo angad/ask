@@ -72,7 +72,7 @@ a {
                                         <div class="clearfix"></div>
                                     </div>
                                 </div>
-           ;
+           `;
            $("#home").append(rowHTML);
        }
    }
