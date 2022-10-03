@@ -58,24 +58,56 @@ a {
 </head>
 
 <script type="text/javascript">
-    function build_wiki_search_url(pattern) {
+    function buildUrl(pattern) {
         var base_url = "https://en.wikipedia.org/w/api.php";
         var request_url = "?action=query&format=json&generator=prefixsearch&prop=pageprops|description|info&inprop=url&gpslimit=10&gpssearch=";
         var url = base_url + request_url + pattern;
         return url;
     }
+    
+    // populates rows of url, title and description for each site
+    function transformSearchResults(site, data) {
+        var result = [];
+        switch(site) {
+            case "wikipedia":
+                var pages = Object.values(data.query.pages);
+                for (const page in pages) {
+                    row['url'] = pages[page].canonicalurl;
+                    row['tite'] = pages[page].title;
+                    row['description'] = pages[page].description;
+                    row['site'] = site;
+                    results.push(row);
+                }
+                break;
+            case "github":
+                result = null;
+                break;
+            case "youtube":
+                result = null;
+                break;
+            case "hackernews":
+                result = null;
+                break;
+            case "reddit":
+                result = null;
+                break;
+            case "duckduckgoose":
+                result = null;
+                break;
+        }
+        return result;
+    }
 
-   function setWikiSearchResults(pages) {
-       var querySource = "Wikipedia";
+    function setSearchResults(rows) {
        $("#home").html("");
-       for (const page in pages) {
+       for (const row in rows) {
            var rowHTML = `
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="search-item">
-                                            <h4 class="mb-1"><a href="${pages[page].canonicalurl}">${querySource} - ${pages[page].title}</a></h4>
-                                            <div class="font-13 text-success mb-3">${pages[page].canonicalurl}</div>
-                                            <p class="mb-0 text-muted">${pages[page].description}</p>
+                                            <h4 class="mb-1"><a href="${row.url}">${site} - ${row.title}</a></h4>
+                                            <div class="font-13 text-success mb-3">${row.url}</div>
+                                            <p class="mb-0 text-muted">${row.description}</p>
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -88,15 +120,16 @@ a {
    function enterSearch(e) {
         e.preventDefault();
         console.log("Submit button clicked");
-        var pattern = $("#query").val();
-        var url = build_wiki_search_url(pattern);
+        var query = $("#query").val();
+        var url = buildSearchUrl(query);
+        var sites = $(":checkbox:checked");
+        console.log(sites);
         $.ajax( {
             type: "GET",
             url: url,
             dataType: 'jsonp',
             success: function(data) {
-                console.log(Object.values(data.query.pages));
-                setWikiSearchResults(Object.values(data.query.pages));
+                setSearchResults(transformSearchResults("wikipedia", data));
             },
             error: function(errorMessage) {
                 console.log("damnn");
@@ -118,21 +151,21 @@ a {
                 $("#query").val(queryDefaultText);
             }
         });
-        const leftsites = ["wikipedia", "youtube", "duckduckgoose", "hackernews"];
+        const leftsites = ["wikipedia", "youtube", "hackernews"];
         for (const site of leftsites) {
             $("#leftsites").append(
                 `
                 <input type="checkbox" id="${site}" name="${site}"/>
-                <label for="${site}">${site}</label>
+                <label for="${site}">${site}</label> <br/>
                 `
             );
         }
-        const rightsites = ["wikipedia", "youtube", "duckduckgoose", "hackernews"];
+        const rightsites = ["github", "reddit", "duckduckgoose"];
         for (const site of rightsites) {
             $("#rightsites").append(
                 `
                 <input type="checkbox" id="${site}" name="${site}"/>
-                <label for="${site}">${site}</label>
+                <label for="${site}">${site}</label> <br/>
                 `
             );
         }
