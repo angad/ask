@@ -58,10 +58,30 @@ a {
 </head>
 
 <script type="text/javascript">
-    function buildUrl(pattern) {
-        var base_url = "https://en.wikipedia.org/w/api.php";
-        var request_url = "?action=query&format=json&generator=prefixsearch&prop=pageprops|description|info&inprop=url&gpslimit=10&gpssearch=";
-        var url = base_url + request_url + pattern;
+    function buildSearchUrl(site, pattern) {
+        var url = "";
+        switch(site) {
+            case "wikipedia":
+                var base_url = "https://en.wikipedia.org/w/api.php";
+                var request_url = "?action=query&format=json&generator=prefixsearch&prop=pageprops|description|info&inprop=url&gpslimit=10&gpssearch=";
+                url = base_url + request_url + pattern;
+                break;
+            case "github":
+                result = null;
+                break;
+            case "youtube":
+                result = null;
+                break;
+            case "hackernews":
+                result = null;
+                break;
+            case "reddit":
+                result = null;
+                break;
+            case "duckduckgoose":
+                result = null;
+                break;
+        }
         return url;
     }
     
@@ -121,8 +141,8 @@ a {
         e.preventDefault();
         console.log("Submit button clicked");
         var query = $("#query").val();
-        var url = buildSearchUrl(query);
         var sites = $(":checkbox:checked");
+        var url = buildSearchUrl("wikipedia", query);
         console.log(sites);
         $.ajax( {
             type: "GET",
