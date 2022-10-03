@@ -92,6 +92,7 @@ a {
             case "wikipedia":
                 var pages = Object.values(data.query.pages);
                 for (const page in pages) {
+                    var row = {};
                     row['url'] = pages[page].canonicalurl;
                     row['tite'] = pages[page].title;
                     row['description'] = pages[page].description;
