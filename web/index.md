@@ -45,6 +45,14 @@ a {
 .btn-custom, .btn-danger, .btn-info, .btn-inverse, .btn-pink, .btn-primary, .btn-purple, .btn-success, .btn-warning {
     color: #fff!important;
 }
+
+.siteselector {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
 </style>
 
 </head>
@@ -110,14 +118,21 @@ a {
                 $("#query").val(queryDefaultText);
             }
         });
-        const sites = ["wikipedia", "youtube", "duckduckgoose", "hackernews"];
-        for (const site of sites) {
-            $("#sites").append(
+        const leftsites = ["wikipedia", "youtube", "duckduckgoose", "hackernews"];
+        for (const site of leftsites) {
+            $("#leftsites").append(
                 `
-                <div>
-                    <input type="checkbox" id="${site}" name="${site}">
-                    <label for="${site}">${site}</label>
-                </div>
+                <input type="checkbox" id="${site}" name="${site}"/>
+                <label for="${site}">${site}</label>
+                `
+            );
+        }
+        const rightsites = ["wikipedia", "youtube", "duckduckgoose", "hackernews"];
+        for (const site of rightsites) {
+            $("#rightsites").append(
+                `
+                <input type="checkbox" id="${site}" name="${site}"/>
+                <label for="${site}">${site}</label>
                 `
             );
         }
@@ -142,9 +157,15 @@ a {
                                         <button type="button" class="btn waves-effect waves-light btn-custom"><i class="fa fa-search mr-1"></i> Search</button>
                                     </div>
                                 </div>
-                                <fieldset id="sites">
-                                    <legend>Sites</legend>
-                                </fieldset>
+                                <div class="siteselector">
+                                    <div class="column">
+                                        <fieldset id="rightsites"/> 
+                                    </div>
+                                    <div class="column">
+                                        <fieldset id="leftsites"/> 
+                                    </div>
+                                </div>
+                                
                             </div>
                         </div>
                     </div>
