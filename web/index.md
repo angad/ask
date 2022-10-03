@@ -59,7 +59,7 @@ a {
 
    function setWikiSearchResults(pages) {
        var querySource = "Wikipedia";
-       $("#home").val("");
+       $("#home").html("");
        for (const page in pages) {
            var rowHTML = `
                                 <div class="row">
@@ -110,6 +110,17 @@ a {
                 $("#query").val(queryDefaultText);
             }
         });
+        const sites = ["wikipedia", "youtube", "duckduckgoose", "hackernews"];
+        for (const site of sites) {
+            $("#sites").append(
+                `
+                <div>
+                    <input type="checkbox" id="${site}" name="${site}">
+                    <label for="${site}">${site}</label>
+                </div>
+                `
+            );
+        }
         $(".btn").click(enterSearch);
     })
 
@@ -131,6 +142,9 @@ a {
                                         <button type="button" class="btn waves-effect waves-light btn-custom"><i class="fa fa-search mr-1"></i> Search</button>
                                     </div>
                                 </div>
+                                <fieldset id="sites">
+                                    <legend>Sites</legend>
+                                </fieldset>
                             </div>
                         </div>
                     </div>
