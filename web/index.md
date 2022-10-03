@@ -97,7 +97,7 @@ a {
                     row['tite'] = pages[page].title;
                     row['description'] = pages[page].description;
                     row['site'] = site;
-                    results.push(row);
+                    result.push(row);
                 }
                 break;
             case "github":
