@@ -124,7 +124,8 @@ a {
     function setSearchResults(site, rows) {
        $("#home").html("");
        for (const row in rows) {
-           var rowHTML = `
+            console.log(row);
+            var rowHTML = `
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="search-item">
