@@ -162,15 +162,15 @@ a {
         for (site in sites) {
             console.log(sites[site]);
             var url = buildSearchUrl(sites[site], query);
-            var datatype = '';
+            var datatype = null;
             if (site == "wikipedia") {
-                datatype = "jsonp";
+                datatype = 'jsonp';
             }
             $.ajax( {
                 type: "GET",
                 url: url,
-                // dataType: datatype,
-                dataType: 'jsonp',
+                dataType: datatype,
+                // dataType: 'jsonp',
                 success: function(data) {
                     setSearchResults(sites[site], transformSearchResults(sites[site], data));
                 },
