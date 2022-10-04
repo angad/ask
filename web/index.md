@@ -90,7 +90,6 @@ a {
     // populates rows of url, title and description for each site
     function transformSearchResults(site, data) {
         var result = [];
-        console.log(data);
         switch(site) {
             case "wikipedia":
                 var pages = Object.values(data.query.pages);
@@ -114,7 +113,16 @@ a {
                 break;
             case "reddit":
                 console.log(data);
-                var pages = Object.values(data.children)
+                var pages = data.data.children;
+                console.log(pages);
+                for (page in pages) {
+                    var row = {}
+                    row['url'] = "https://www.reddit.com" + pages[page].data.permalink;
+                    row['title'] = pages[page].data.subreddit;
+                    row['description'] = pages[page].data.title;
+                    row['site'] = site;
+                    result.push(row);
+                }
                 break;
             case "duckduckgoose":
                 result = null;
