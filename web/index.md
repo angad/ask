@@ -112,9 +112,7 @@ a {
                 result = null;
                 break;
             case "reddit":
-                console.log(data);
                 var pages = data.data.children;
-                console.log(pages);
                 for (page in pages) {
                     var row = {}
                     row['url'] = "https://www.reddit.com" + pages[page].data.permalink;
@@ -164,10 +162,14 @@ a {
         for (site in sites) {
             console.log(sites[site]);
             var url = buildSearchUrl(sites[site], query);
+            var datatype = '';
+            if (site == "wikipedia") {
+                datatype = "jsonp";
+            }
             $.ajax( {
                 type: "GET",
                 url: url,
-                // dataType: 'jsonp',
+                dataType: datatype,
                 success: function(data) {
                     setSearchResults(sites[site], transformSearchResults(sites[site], data));
                 },
