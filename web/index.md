@@ -163,7 +163,7 @@ a {
             console.log(sites[site]);
             var url = buildSearchUrl(sites[site], query);
             var datatype = null;
-            if (site == "wikipedia") {
+            if (sites[site] == "wikipedia") {
                 datatype = 'jsonp';
             }
             $.ajax( {
