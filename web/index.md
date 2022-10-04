@@ -169,7 +169,8 @@ a {
             $.ajax( {
                 type: "GET",
                 url: url,
-                dataType: datatype,
+                // dataType: datatype,
+                dataType: 'jsonp',
                 success: function(data) {
                     setSearchResults(sites[site], transformSearchResults(sites[site], data));
                 },
