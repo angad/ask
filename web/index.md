@@ -77,7 +77,7 @@ a {
                 break;
             case "reddit":
                 var base_url = "https://www.reddit.com/search.json";
-                var request_url = "sort=hot&limit=10&q=";
+                var request_url = "?sort=hot&limit=10&q=";
                 url = base_url + request_url + pattern;
                 break;
             case "duckduckgoose":
