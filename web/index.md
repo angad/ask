@@ -67,19 +67,21 @@ a {
                 url = base_url + request_url + pattern;
                 break;
             case "github":
-                result = null;
+                url = null;
                 break;
             case "youtube":
-                result = null;
+                url = null;
                 break;
             case "hackernews":
-                result = null;
+                url = null;
                 break;
             case "reddit":
-                result = null;
+                var base_url = "https://www.reddit.com/search.json";
+                var request_url = "sort=hot&limit=10&q=";
+                url = base_url + request_url + pattern;
                 break;
             case "duckduckgoose":
-                result = null;
+                url = null;
                 break;
         }
         return url;
@@ -88,6 +90,7 @@ a {
     // populates rows of url, title and description for each site
     function transformSearchResults(site, data) {
         var result = [];
+        console.log(data);
         switch(site) {
             case "wikipedia":
                 var pages = Object.values(data.query.pages);
@@ -110,7 +113,8 @@ a {
                 result = null;
                 break;
             case "reddit":
-                result = null;
+                console.log(data);
+                var pages = Object.values(data.children)
                 break;
             case "duckduckgoose":
                 result = null;
@@ -120,7 +124,7 @@ a {
     }
 
     function setSearchResults(site, rows) {
-       $("#home").html("");
+    //    $("#home").html("");
        for (const row in rows) {
             var rowHTML = `
                                 <div class="row">
@@ -139,23 +143,31 @@ a {
    }
 
    function enterSearch(e) {
+        $("#home").html("");
         e.preventDefault();
-        console.log("Submit button clicked");
+        // console.log("Submit button clicked");
         var query = $("#query").val();
-        var sites = $(":checkbox:checked");
-        var url = buildSearchUrl("wikipedia", query);
-        console.log(sites);
-        $.ajax( {
-            type: "GET",
-            url: url,
-            dataType: 'jsonp',
-            success: function(data) {
-                setSearchResults("wikipedia", transformSearchResults("wikipedia", data));
-            },
-            error: function(errorMessage) {
-                console.log("damnn");
-            }
+        
+        var sites = [];
+        $('.siteselector input:checked').each(function() {
+            sites.push($(this).attr('name'));
         });
+        console.log(sites);
+        for (site in sites) {
+            console.log(sites[site]);
+            var url = buildSearchUrl(sites[site], query);
+            $.ajax( {
+                type: "GET",
+                url: url,
+                dataType: 'jsonp',
+                success: function(data) {
+                    setSearchResults(sites[site], transformSearchResults(sites[site], data));
+                },
+                error: function(errorMessage) {
+                    console.log("damnn");
+                }
+            });
+        }
     }
 
     $(document).ready(function() {
