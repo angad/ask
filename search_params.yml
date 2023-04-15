@@ -1,0 +1,57 @@
+---
+wikipedia:
+  url: https://en.wikipedia.org/w/api.php
+  short: w
+  response: 
+  params:
+    action: query
+    format: json
+    generator: prefixsearch
+    prop: pageprops|description|info
+    inprop: url
+    gpslimit: 1
+    gpssearch: $query
+  response_parser: .query.pages | .[].fullurl
+
+youtube:
+  module: youtubesearchpython 
+  func: VideosSearch
+  short: y
+  params:
+    limit: 1
+  response_parser: .result[0].link
+
+reddit:
+  url: https://www.reddit.com/search.json
+  short: r
+  params:
+    q: $query
+    sort: hot
+    limit: 1
+  response_parser: .data.children[0].data.permalink
+  response_append: https://reddit.com
+
+github:
+  url: https://api.github.com/search/repositories
+  short: g
+  params:
+    q: $query
+    sort: stars
+    per_page: 1
+  response_parser: .items[0].html_url
+
+duckduckgo:
+  url: https://api.duckduckgo.com 
+  short: d
+  params:
+    q: $query
+    format: json
+  response_parser: .RelatedTopics[0].FirstURL
+
+hackernews:
+  url: https://hn.algolia.com/api/v1/search 
+  short: h
+  params:
+    query: $query
+    hitsPerPage: 1
+  response_parser: .hits[0].url
