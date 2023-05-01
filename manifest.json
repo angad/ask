@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Search specific sites plugin",
+    "name_for_model": "ask",
+    "description_for_human": "Plugin for querying specific websites like wikipedia, duckduckgo, hacker news, youtube, reddit, github etc.",
+    "description_for_model": "Plugin for querying specific websites like wikipedia, duckduckgo, hacker news, youtube, reddit, github etc.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "http://{{host}}/openapi.yaml",
+        "is_user_authenticated": false
+    },
+    "logo_url": "http://{{host}}/logo.png",
+    "contact_email": "dev@angad.sg",
+    "legal_info_url": "http://angad.sg/legal"
+}

@@ -3,3 +3,4 @@ requests
 youtube-search-python
 jq
 pyyaml
+flask

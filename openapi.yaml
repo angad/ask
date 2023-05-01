@@ -1,0 +1,39 @@
+openapi: 3.0.1
+info:
+  title: Search Engine 
+  description: A plugin that allows the user to send search queries to various sites such as wikipedia, duckduckgo, hacker news, youtube, reddit, github.
+  version: 'v1'
+servers:
+  - url: http://{{host}}
+paths:
+  /:
+    get:
+      operationId: execute 
+      summary: Get results from a query
+      parameters:
+        - in: query
+          name: search 
+          schema:
+              type: string
+              enum: [wikipedia, youtube, reddit, github, duckduckgo, hackernews]
+          required: true
+          description: Name of the website to query.
+        - in: query
+          name: content 
+          schema:
+              type: string
+          required: true
+          description: Query string.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object 
+                required:
+                  - url
+                properties:
+                  url:
+                    type: string
+                    description: The url of the search result.
